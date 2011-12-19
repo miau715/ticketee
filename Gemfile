@@ -30,12 +30,12 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
-group :test, :development do 
+group :test, :development do
   gem 'rspec-rails', '~> 2.5'
 end
 
-group :test do 
+group :test do
   gem 'cucumber-rails', '= 1.0.6'
-  gem 'capybara' 
+  gem 'capybara'
   gem 'database_cleaner'
 end
