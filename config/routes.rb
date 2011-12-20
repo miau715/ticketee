@@ -24,7 +24,9 @@ Ticketee::Application.routes.draw do
   #       get 'sold'
   #     end
   #   end
-  resources :projects
+  resources :projects do
+    resources :tickets
+  end
 
   # Sample resource route with sub-resources:
   #   resources :products do
