@@ -55,8 +55,12 @@ Ticketee::Application.routes.draw do
   #   end
   namespace :admin do
     root :to => "base#index"
-    resources :users
+    resources :users do
+      resources :permissions
+    end
   end
+  
+  put '/admin/users/:user_id/permissions', :to => 'admin/permissions#update', :as => :update_user_permissions
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
