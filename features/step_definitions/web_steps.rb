@@ -32,12 +32,12 @@ end
 World(WithinHelpers)
 
 # Single-line step scoper
-When /^(.*) within (.*[^:])$/ do |step, parent|
-  with_scope(parent) { step }
+When /^(.*) within ([^:]+)$/ do |step, parent|
+  with_scope(parent) { When step }
 end
 
 # Multi-line step scoper
-When /^(.*) within (.*[^:]):$/ do |step, parent, table_or_string|
+When /^(.*) within ([^:]+):$/ do |step, parent, table_or_string|
   with_scope(parent) { When "#{step}:", table_or_string }
 end
 
@@ -67,13 +67,13 @@ end
 
 # Use this to fill in an entire form with data from a table. Example:
 #
-#   When I fill in the following:
-#     | Account Number | 5002       |
-#     | Expiry date    | 2009-11-01 |
-#     | Note           | Nice guy   |
-#     | Wants Email?   |            |
+# When I fill in the following:
+# | Account Number | 5002 |
+# | Expiry date | 2009-11-01 |
+# | Note | Nice guy |
+# | Wants Email? | |
 #
-# TODO: Add support for checkbox, select or option
+# TODO: Add support for checkbox, select og option
 # based on naming conventions.
 #
 When /^(?:|I )fill in the following:$/ do |fields|
@@ -162,49 +162,6 @@ Then /^the "([^"]*)" field(?: within (.*))? should not contain "([^"]*)"$/ do |f
   end
 end
 
-Then /^the "([^"]*)" field should have the error "([^"]*)"$/ do |field, error_message|
-  element = find_field(field)
-  classes = element.find(:xpath, '..')[:class].split(' ')
-
-  form_for_input = element.find(:xpath, 'ancestor::form[1]')
-  using_formtastic = form_for_input[:class].include?('formtastic')
-  error_class = using_formtastic ? 'error' : 'field_with_errors'
-
-  if classes.respond_to? :should
-    classes.should include(error_class)
-  else
-    assert classes.include?(error_class)
-  end
-
-  if page.respond_to?(:should)
-    if using_formtastic
-      error_paragraph = element.find(:xpath, '../*[@class="inline-errors"][1]')
-      error_paragraph.should have_content(error_message)
-    else
-      page.should have_content("#{field.titlecase} #{error_message}")
-    end
-  else
-    if using_formtastic
-      error_paragraph = element.find(:xpath, '../*[@class="inline-errors"][1]')
-      assert error_paragraph.has_content?(error_message)
-    else
-      assert page.has_content?("#{field.titlecase} #{error_message}")
-    end
-  end
-end
-
-Then /^the "([^"]*)" field should have no error$/ do |field|
-  element = find_field(field)
-  classes = element.find(:xpath, '..')[:class].split(' ')
-  if classes.respond_to? :should
-    classes.should_not include('field_with_errors')
-    classes.should_not include('error')
-  else
-    assert !classes.include?('field_with_errors')
-    assert !classes.include?('error')
-  end
-end
-
 Then /^the "([^"]*)" checkbox(?: within (.*))? should be checked$/ do |label, parent|
   with_scope(parent) do
     field_checked = find_field(label)['checked']
@@ -240,7 +197,7 @@ Then /^(?:|I )should have the following query string:$/ do |expected_pairs|
   query = URI.parse(current_url).query
   actual_params = query ? CGI.parse(query) : {}
   expected_params = {}
-  expected_pairs.rows_hash.each_pair{|k,v| expected_params[k] = v.split(',')} 
+  expected_pairs.rows_hash.each_pair{|k,v| expected_params[k] = v.split(',')}
   
   if actual_params.respond_to? :should
     actual_params.should == expected_params
