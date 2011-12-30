@@ -13,6 +13,7 @@
 	<% end %>
 	
   <br /><small>Created by <%= @ticket.user.email %></small> 
+  <%= render @ticket.state if @ticket.state %>
   <%= simple_format(@ticket.description) %>
 
   <% if @ticket.assets.exists? %>
@@ -37,6 +38,7 @@
 	    There are no comments for this ticket.
 	  <% end %>
 	</div>
+	<%= puts ">>>>>>>>>>>>>>>>>>>> #{@states.inspect}" %>
 	<%= render "comments/form" %>
 	
 	
