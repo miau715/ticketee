@@ -25,5 +25,6 @@ describe CommentsController do
       ticket.reload
       ticket.state.should eql(nil)
     end
+    
   end  
 end
