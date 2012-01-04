@@ -35,6 +35,12 @@ group :test, :development do
   gem 'rspec-rails', '~> 2.5'
 end
 
+group :development do
+  gem 'hirb'
+  gem 'wirble'
+  gem 'map_by_method'
+end
+
 group :test do
   gem 'cucumber-rails', '= 1.0.6'
   gem 'capybara'
