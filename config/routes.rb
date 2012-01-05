@@ -34,6 +34,10 @@ Ticketee::Application.routes.draw do
       collection do
         get :search
       end
+      
+      member do
+        post :watch
+      end
     end
   end
   
