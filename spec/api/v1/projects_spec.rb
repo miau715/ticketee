@@ -10,9 +10,13 @@ describe "/api/v1/projects", :type => :api do
   end
 
   context "projects viewable by this user" do
+    before do 
+      Factory(:project, :name => "Access Denied")
+    end
+    
     let(:url) { "/api/v1/projects" }
     it "JSON" do
-      get "#{url}.json"
+      get "#{url}.json", :token => token
     
       projects_json = Project.for(user).all.to_json
       last_response.body.should eql(projects_json)
@@ -24,7 +28,13 @@ describe "/api/v1/projects", :type => :api do
         p["project"]["name"] == "Ticketee"
       end.should be_true
 
+      projects.any? do |p| 
+        p["project"]["name"] == "Access Denied"
+      end.should be_false
+      
     end
   end
+  
+  
 
 end
