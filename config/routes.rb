@@ -1,8 +1,14 @@
 Ticketee::Application.routes.draw do
-
+  
+  namespace :api do
+    namespace :v1 do 
+      resources :projects
+    end 
+  end
+  
   devise_for :users, :controllers => { :registrations => "registrations" }
   get '/awaiting_confirmation', :to => "users#confirmation", :as => 'confirm_user'
-  
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -72,6 +78,7 @@ Ticketee::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  
   namespace :admin do
     root :to => "base#index"
     resources :users do
