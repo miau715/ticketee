@@ -23,4 +23,8 @@ class Project < ActiveRecord::Base
     redirect_to projects_path
   end
   
+  def title
+    name
+  end
+  
 end
