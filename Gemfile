@@ -40,6 +40,7 @@ group :development do
   gem 'hirb'
   gem 'wirble'
   gem 'map_by_method'
+  gem 'capistrano'
 end
 
 group :test do
@@ -56,3 +57,6 @@ gem 'cancan'
 gem 'paperclip'
 gem 'searcher'
 
+group :production do 
+  gem 'pg'
+end
