@@ -30,9 +30,6 @@ task :copy_config_files, :roles => [:app] do
   run "cp #{db_config} #{release_path}/config/database.yml"
 end
 
-task :update_symlink do
-  run "ln -s {shared_path}/public/system {current_path}/public/system"
-end
 
 after "deploy:update_code", "deploy:copy_config_files"
-after "deploy:finalize_update", "deploy:update_symlink"
+
