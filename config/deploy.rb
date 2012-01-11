@@ -16,6 +16,7 @@ set :branch, "master"
 set :scm_verbose, true
 set :use_sudo, false
 set :user, "ticketeeapp.com"
+set :normalize_asset_timestamps, false
 default_environment["PATH"] = "/opt/ruby/bin:/usr/local/bin:/usr/bin:/bin:/usr/games"
 namespace :deploy do
 desc "restart"

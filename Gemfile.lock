@@ -109,6 +109,7 @@ GEM
     mime (0.1)
     mime-types (1.17.2)
     multi_json (1.0.4)
+    mysql (2.8.1)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -219,6 +220,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   map_by_method
+  mysql
   paperclip
   rails (= 3.1.3)
   rspec-rails (~> 2.5)
