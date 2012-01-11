@@ -18,10 +18,6 @@ set :use_sudo, false
 set :user, "ticketeeapp.com"
 set :normalize_asset_timestamps, false
 default_environment["PATH"] = "/opt/ruby/bin:/usr/local/bin:/usr/bin:/bin:/usr/games"
-task :copy_config_files, :roles => [:app] do
-  db_config = "#{shared_path}/database.yml"
-  run "cp #{db_config} #{release_path}/config/database.yml"
-end
 
 namespace :deploy do
 desc "restart"
@@ -29,9 +25,10 @@ task :restart do
 run "touch #{current_path}/tmp/restart.txt"
 end
 end
+
 desc "Create database.yml and asset packages for production"
-
-
-
-after "deploy:update_code", "deploy:copy_config_files"
+after("deploy:update_code") do
+  db_config = "#{shared_path}/config/database.yml.production"
+  run "cp #{db_config} #{release_path}/config/database.yml"
+end
 
