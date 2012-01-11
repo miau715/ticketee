@@ -3,8 +3,8 @@ set :stages, %w(staging production)
 
 set :application, "ticketee"
 set :domain, "176.34.61.11"
-set :repository, "git@github.com:miau715/ticketee.git"
-set :deploy_to, "/home/apps/ticketee"
+set :repository, "git://github.com/miau715/ticketee.git"
+set :deploy_to, "/home/ticketeeapp.com/apps/#{application}"
 role :app, domain
 role :web, domain
 role :db, domain, :primary => true
