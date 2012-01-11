@@ -15,8 +15,7 @@ set :scm, :git
 set :branch, "master"
 set :scm_verbose, true
 set :use_sudo, false
-set :user, "apps"
-set :group, "apps"
+set :user, "ticketeeapp.com"
 default_environment["PATH"] = "/opt/ruby/bin:/usr/local/bin:/usr/bin:/bin:/usr/games"
 namespace :deploy do
 desc "restart"
