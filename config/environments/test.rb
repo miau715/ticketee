@@ -39,4 +39,6 @@ Ticketee::Application.configure do
   
   #Action Mailer setting
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  
+  OmniAuth.config.test_mode = true
 end
