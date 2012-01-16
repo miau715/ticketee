@@ -60,5 +60,6 @@ gem 'devise', '~> 1.4.3'
 gem 'cancan'
 gem 'paperclip'
 gem 'searcher'
+gem 'kaminari'
 gem 'rake'
 gem "oa-oauth", :require => "omniauth/oauth"
