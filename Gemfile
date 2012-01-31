@@ -63,3 +63,4 @@ gem 'searcher'
 gem 'kaminari'
 gem 'rake'
 gem "oa-oauth", :require => "omniauth/oauth"
+gem 'delayed_job'
